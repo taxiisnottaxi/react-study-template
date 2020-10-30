@@ -1,18 +1,17 @@
 // JS 打包入口文件
-// 1. 导入 React 包
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// 导入评论列表样式【注意，这种样式是全局的】
-import './css/commentList.css'
+// 导入计数器组件
+// import Counter from './components/Counter.jsx'
+import Test from './components/TestReceiveProps.jsx'
 
-import CommentList from './components/comment1/CommentList.jsx'
-
-
-
+// 使用 render 函数渲染 虚拟DOM
 ReactDOM.render(
     <div>
-        <CommentList></CommentList>
+        {/* 规定，每个用户在使用组件的时候，必须传递一个默认的数量值，作为组件初始化的数据 */}
+        {/* <Counter initCount={3}></Counter> */}
+        <Test></Test>
     </div>,
     document.getElementById('app')
 )
