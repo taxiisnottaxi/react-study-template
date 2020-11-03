@@ -7,7 +7,8 @@ import ReactDOM from 'react-dom'
 // import Test from './components/TestReceiveProps.jsx'
 // import BindThis from './components/BindThis.jsx'
 
-import CmtList from './components/Comment/CmtList.jsx'
+// import CmtList from './components/Comment/CmtList.jsx'
+import Context from './components/Comment/Context.jsx'
 
 // 使用 render 函数渲染 虚拟DOM
 ReactDOM.render(
@@ -16,7 +17,8 @@ ReactDOM.render(
         {/* <Counter initCount={3}></Counter> */}
         {/* <Test></Test> */}
         {/* <BindThis></BindThis> */}
-        <CmtList></CmtList>
+        {/* <CmtList></CmtList> */}
+        <Context></Context>
     </div>,
     document.getElementById('app')
 )
