@@ -2,23 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// 导入计数器组件
-// import Counter from './components/Counter.jsx'
-// import Test from './components/TestReceiveProps.jsx'
-// import BindThis from './components/BindThis.jsx'
-
-// import CmtList from './components/Comment/CmtList.jsx'
-import Context from './components/Comment/Context.jsx'
+import App from './App.jsx'
 
 // 使用 render 函数渲染 虚拟DOM
-ReactDOM.render(
-    <div>
-        {/* 规定，每个用户在使用组件的时候，必须传递一个默认的数量值，作为组件初始化的数据 */}
-        {/* <Counter initCount={3}></Counter> */}
-        {/* <Test></Test> */}
-        {/* <BindThis></BindThis> */}
-        {/* <CmtList></CmtList> */}
-        <Context></Context>
-    </div>,
-    document.getElementById('app')
-)
+ReactDOM.render(<App></App>, document.getElementById('app'))
