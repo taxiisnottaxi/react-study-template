@@ -14,6 +14,9 @@ import Home from './components/Home.jsx'
 import About from './components/About.jsx'
 import Movie from './components/Movie.jsx'
 
+// 导入日期选择组件
+import { DatePicker } from 'antd'
+
 export default class App extends React.Component{
     constructor(props){
         super(props)
@@ -27,6 +30,7 @@ export default class App extends React.Component{
         return <HashRouter>
             <div>
                 <h1>这是网站的APP根组件</h1>
+                <DatePicker></DatePicker>
                 <hr/>
                 <Link to="/home">首页</Link>&nbsp;&nbsp;
                 <Link to="/movie/top250/10">电影</Link>&nbsp;&nbsp;

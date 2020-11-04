@@ -20,6 +20,13 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
+                    'css-loader'
+                ]
+            },
+            { 
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -27,10 +34,10 @@ module.exports = {
                                 localIdentName: '[path][name]-[local]-[hash:5]'
                             }
                         }
-                    }
+                    },
+                    'sass-loader'
                 ]
             },
-            { test: /\.scss$/,use: ['style-loader','css-loader','sass-loader']},
             { 
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
