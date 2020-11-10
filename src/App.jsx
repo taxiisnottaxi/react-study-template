@@ -1,21 +1,20 @@
+// 这是项目的根组件
 import React from 'react'
-
-// react-router-dom
-// 如果要使用路由模块，第一步，安装：npm install react-router-dom
-
-// 第二步，导入路由模块，按需导入三个
-// 1.HashRouter 表示一个路由的根容器，将来所有的路由相关的东西，都要包裹在 HashRouter 里面
-//      而且，一个网站中，只需要一个 HashRouter 就好了
-// 2.Route 表示一个路由规则，在 Route 上有两个比较重要的属性，path 和 component
-// 3.Link 表示一个路由的链接，就好比 vue 中的 <router-link to=""></router-link>
 import { HashRouter, Route, Link } from 'react-router-dom'
 
-import Home from './components/Home.jsx'
-import About from './components/About.jsx'
-import Movie from './components/Movie.jsx'
+// 全局导入样式，默认会按需导入
+import 'antd/dist/antd.css'
+// 导入模块化的样式
+import styles from  './css/app.scss'
 
-// 导入日期选择组件
-import { DatePicker } from 'antd'
+// 导入需要的 ant design 组件
+import { Layout, Menu } from 'antd';
+const { Header, Content, Footer } = Layout;
+
+// 导入路由相关的组件页面
+import HomeContainer from './components/home/Home.jsx'
+import MovieContainer from './components/movie/Movie.jsx'
+import AboutContainer from './components/about/About.jsx'
 
 export default class App extends React.Component{
     constructor(props){
@@ -23,35 +22,40 @@ export default class App extends React.Component{
         this.state = {}
     }
 
-    render() {
-        // 当使用 HashRouter 把 App 根组件的元素包裹起来之后，网站就已经启用路由了
-        // 一个 HashRouter 中只能放唯一的根元素
-        // 在一个网站中，只需要使用唯一一次 <HashRouter></HashRouter>即可
-        return <HashRouter>
-            <div>
-                <h1>这是网站的APP根组件</h1>
-                <DatePicker></DatePicker>
-                <hr/>
-                <Link to="/home">首页</Link>&nbsp;&nbsp;
-                <Link to="/movie/top250/10">电影</Link>&nbsp;&nbsp;
-                <Link to="/about">关于</Link>
-                <hr/>
+    componentWillMount(){
+        console.log()
+    }
 
-                {/* Route创建的标签就是路由规则，其中 path 表示要匹配的内容，component表示要展示的组件 */}
-                {/* 在 Vue 中有一个专门的 router-view 标签，专门用来放置匹配到的路由组件，但是
-                 react-router 中并没有类似这样的标签，而是直接将 Router 当做占位符 */}
-                {/* Route 具有两种身份：
-                        1. 一个路由匹配规则
-                        2. 一个占位符，表示将来匹配到的组件都放到这个位置 */}
-                <Route path="/home" component={Home}></Route>
-                <hr/>
-                {/* 注意：默认情况下，路由中的规则是模糊匹配的，如果路由可以部分匹配成功，
-                就会展示路由对应的组件，精确匹配要添加exact属性 */}
-                {/* 如果要匹配参数，则可以在匹配规则中使用:修饰符，表示这个位置匹配到的是参数 */}
-                <Route path="/movie/:type/:id" component={Movie} exact></Route>
-                <hr/>
-                <Route path="/about" component={About}></Route>
-            </div>
+    render() {
+        return <HashRouter>
+            <Layout className="layout" style={{height: '100%'}}>
+                {/* Header 头部区域 */}
+                <Header>
+                    <div className={styles.logo} />
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={window.location.hash.split('/')[1]}>
+                        <Menu.Item key="home">
+                            <Link to="/home">首页</Link>
+                        </Menu.Item>
+                        <Menu.Item key="movie">
+                            <Link to="/movie/in_theaters/1">电影</Link>
+                        </Menu.Item>
+                        <Menu.Item key="about">
+                            <Link to="/about">关于</Link>
+                        </Menu.Item>
+                    </Menu>
+                </Header>
+
+                {/* 中间的内容区域 */}
+                {/* flex=1代表占了剩余的高度 */}
+                <Content style={{ backgroundColor: "#fff", height: '100%', flex: 1}}>
+                    <Route path="/home" component={HomeContainer}></Route>
+                    <Route path="/movie" component={MovieContainer}></Route>
+                    <Route path="/about" component={AboutContainer}></Route>
+                </Content>
+
+                {/* Footer底部区域 */}
+                <Footer style={{ textAlign: 'center' }}>2020 react 牛刀小试</Footer>
+            </Layout>
         </HashRouter>
     }
 }
