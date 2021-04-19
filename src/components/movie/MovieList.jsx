@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 // 导入 fetch-jsonp
 import fetchJSONP from 'fetch-jsonp'

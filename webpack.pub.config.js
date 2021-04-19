@@ -9,7 +9,6 @@ const webpack = require('webpack')
 module.exports = {
     mode: 'production',
     entry: { // 配置入口节点
-
         vendors: ['jquery'],  // 把第三方包的名称放到这个数组中
         app: path.join(__dirname, './src/main.js')
     },
@@ -31,10 +30,10 @@ module.exports = {
             }
         }),
         new webpack.optimize.SplitChunksPlugin({
-            // name: 'vendors', //指定要抽离的入口名称
-            // filename: 'vendors.js' // 将来在发布的时候，除了会有一个bundle.js，还会多一个vendors.js的文件，里卖弄存放了所有的第三方包
-            chunks: 'all',
-            minSize: 0
+            name: 'vendors', //指定要抽离的入口名称
+            filename: 'vendors.js', // 将来在发布的时候，除了会有一个bundle.js，还会多一个vendors.js的文件，里卖弄存放了所有的第三方包
+            // chunks: 'all',
+            // minSize: 0
         }),
         // 目前不起作用
         // new webpack.DefinePlugin({
@@ -49,34 +48,39 @@ module.exports = {
     module: {
         rules: [
             { 
-                test: /\.css$/,
+                test: /\.css/i,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
+                            esModule: false,
+                            modules: {
+                                namedExport: true
+                            },
                             publicPath: '../' // 用于修正文件路径，在生成的文件前面添加，好像在处理图片引用的时候会有用
                         },
                     },
-                    // 'style-loader',
                     'css-loader'
                 ]
             },
             { 
-                test: /\.scss$/,
+                test: /\.scss$/i,
                 use: [
+                    'style-loader',
                     {
-                        loader: MiniCssExtractPlugin.loader,
+                        loader: 'css-loader',
                         options: {
-                            publicPath: './css/'
-                        },
+                            esModule: false,
+                            modules: {
+                                localIdentName: '[path][name]-[local]-[hash:5]'
+                            }
+                        }
                     },
-                    // 'style-loader',
-                    'css-loader',
                     'sass-loader'
                 ]
-            } ,
+            },
             { 
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|svg|jpg|gif)/,
                 use: [
                     {
                         loader: 'url-loader',
@@ -84,7 +88,7 @@ module.exports = {
                     }
                 ] 
             },
-            { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }
+            { test: /(\.js?|jsx?)$/, use: 'babel-loader', exclude: /node_modules/ }
         ]
     }
 }

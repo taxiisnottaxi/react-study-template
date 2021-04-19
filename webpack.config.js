@@ -17,19 +17,20 @@ module.exports = {
     module: {
         rules: [
             { 
-                test: /\.css$/,
+                test: /\.css$/i,
                 use: [
                     'style-loader',
                     'css-loader'
                 ]
             },
             { 
-                test: /\.scss$/,
+                test: /\.scss$/i,
                 use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
+                            esModule: false,
                             modules: {
                                 localIdentName: '[path][name]-[local]-[hash:5]'
                             }

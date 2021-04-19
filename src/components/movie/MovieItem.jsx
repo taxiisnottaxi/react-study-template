@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React from 'react'
 
 import styles from '../../css/movie_item.scss'
+
 import { Rate } from 'antd'
 
 export default class MovieItem extends React.Component{

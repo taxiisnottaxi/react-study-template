@@ -7,8 +7,8 @@ export default class About extends React.Component{
     }
 
     render() {
-        return<div>
-            About
+        return<div style={{margin:200}}>
+            这个网站是一个豆瓣电影的简易展示网站
         </div>
     }
 }
